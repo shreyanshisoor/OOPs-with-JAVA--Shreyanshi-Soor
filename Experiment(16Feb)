@@ -1,0 +1,45 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class GradeEvaluator {
+
+    public static String calculateGrade(int marks) {
+        if (marks < 0 || marks > 100) {
+            throw new IllegalArgumentException("Marks must be between 0 and 100.");
+        }
+
+        if (marks >= 90) return "A";
+        else if (marks >= 75) return "B";
+        else if (marks >= 60) return "C";
+        else if (marks >= 40) return "D";
+        else return "Fail";
+    }
+
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            
+            System.out.print("Enter Student Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Enter Marks (0-100): ");
+            int marks = sc.nextInt();
+
+            String grade = calculateGrade(marks);
+
+            // Success Output
+            System.out.println("\n--- Evaluation Result ---");
+            System.out.println("Student Name: " + name);
+            System.out.println("Marks Entered: " + marks);
+            System.out.println("Grade Obtained: " + grade);
+
+        } catch (InputMismatchException e) {
+            System.err.println("Error: Invalid input. Please enter numeric marks only.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("An unexpected error occurred: " + e.getMessage());
+        } finally {
+            System.out.println("Marks evaluation completed.");
+        }
+    }
+}
